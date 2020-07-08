@@ -1,7 +1,5 @@
-cmake_minimum_required(VERSION 3.6.4)
+cmake_minimum_required(VERSION 3.6.0)
 
-add_library(i4202nv21
+add_library(i4202rgb24
             SHARED
-            src/main/c/i4202nv21.c）
-
-include_directories(src/main/c)
+        src/main/c/i4202rgb24.c)
