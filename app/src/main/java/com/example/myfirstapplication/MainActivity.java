@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         imgDataSize = (imgPixelSize * 3) >> 1;
 
         try {
-            InputStream is = getResources().openRawResource(R.raw.pic_1280x960);
+            InputStream is = getResources().openRawResource(R.raw.pic_1280x960_i420);
             srcImg = IOUtils.toByteArray(is);
             is.close();
         } catch (IOException e) {
