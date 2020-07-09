@@ -74,20 +74,21 @@ public class MainActivity extends AppCompatActivity {
         Render(rgb, imgWidth, imgHeight);
     }
 
-    public native void Native_I4202RGB24_C(byte[] in, int[] out);
+    public native void Native_I4202RGB24_C(byte[] in, int width, int height, int[] out);
     @SuppressLint("StringFormatMatches")
-    public void NV212RGB24_C(View view) {
+    public void I4202RGB24_C(View view) {
         byte[] demoImg = new byte[imgDataSize];
         System.arraycopy(srcImg, 0, demoImg, 0, imgDataSize);
         long escapedTime = System.currentTimeMillis();
-        int[] rgb = new int[imgPixelSize * 3];
-        Native_I4202RGB24_C(demoImg, rgb);
+        int[] rgb = new int[imgPixelSize];
+        Native_I4202RGB24_C(demoImg, imgWidth, imgHeight, rgb);
         escapedTime = System.currentTimeMillis() - escapedTime;
         timeCost.setText(String.format(getResources().getString(R.string.escapedTime),
                 escapedTime));
+        Render(rgb, imgWidth, imgHeight);
     }
 
-    public native void Native_I4202RGB24_NEON(byte[] in, int[] out);
+    public native void Native_I4202RGB24_NEON(byte[] in, int width, int height, int[] out);
     @SuppressLint("StringFormatMatches")
     public void I4202RGB24_NEON(View view) {
         long escapedTime = System.currentTimeMillis();
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 escapedTime));
     }
 
-    public native void Native_I4202RGB24_ASM(byte[] in, int[] out);
+    public native void Native_I4202RGB24_ASM(byte[] in, int width, int height, int[] out);
     @SuppressLint("StringFormatMatches")
     public void I4202RGB24_ASM(View view) {
         long escapedTime = System.currentTimeMillis();
@@ -162,6 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void Render(int[] raw, int width, int height) {
         Bitmap bm = Bitmap.createBitmap(raw, width, height, Bitmap.Config.ARGB_8888);
+        imgView.setImageBitmap(bm);
+    }
+
+    // Unused, reserve
+    public void Render2(byte[] raw, int width, int height) {
+        Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        bm.copyPixelsFromBuffer(ByteBuffer.wrap(raw));
         imgView.setImageBitmap(bm);
     }
 }
