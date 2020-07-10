@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Algorithm Test</string>
-    <string name="buttonPrompt">Choose one algorithm:</string>
-    <string name="timePrompt">Time cost for current algorithm:</string>
+    <string name="buttonPrompt">Choose one version algorithm for image conversion:</string>
+    <string name="timePrompt">Time cost for current version algorithm:</string>
     <string name="buttonJAVA">JAVA</string>
     <string name="buttonC">C</string>
     <string name="buttonNEON">NEON</string>

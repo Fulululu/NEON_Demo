@@ -91,11 +91,15 @@ public class MainActivity extends AppCompatActivity {
     public native void Native_I4202RGB24_NEON(byte[] in, int width, int height, int[] out);
     @SuppressLint("StringFormatMatches")
     public void I4202RGB24_NEON(View view) {
+        byte[] demoImg = new byte[imgDataSize];
+        System.arraycopy(srcImg, 0, demoImg, 0, imgDataSize);
         long escapedTime = System.currentTimeMillis();
-        //TODO
+        int[] rgb = new int[imgPixelSize];
+        Native_I4202RGB24_NEON(demoImg, imgWidth, imgHeight, rgb);
         escapedTime = System.currentTimeMillis() - escapedTime;
         timeCost.setText(String.format(getResources().getString(R.string.escapedTime),
                 escapedTime));
+//        Render(rgb, imgWidth, imgHeight);
     }
 
     public native void Native_I4202RGB24_ASM(byte[] in, int width, int height, int[] out);
